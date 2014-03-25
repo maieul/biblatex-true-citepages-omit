@@ -45,9 +45,9 @@ The citation styles of the family \emph{verbose} of the \biblatex package offer 
 \usepackage[bibstyle=verbose,citestyle=verbose,citepages=omit]{biblatex}
 \end{minted}
 
-This option is very useful: it suppress the \bibfield{pages} field when a citation is made with a pages' number. For example, the following entry
+This option is very useful: it omits the \bibfield{pages} field when a citation is made with a pages' number. For example, the following entry
 
-\inputminted{bib}{biblatex-true-citepages-omit}
+\inputminted{tex}{biblatex-true-citepages-omit.bib}
 
 called with:
 
@@ -79,7 +79,7 @@ This option works perfectly, except if you add a text after page's number, as yo
 \cite[\pno~112, on this point etc.]{Kaestli1993}
 \end{quotation}
 
-It seems this problem won't be solved in the \biblatex core\footnote{See: \url{https://github.com/plk/biblatex/issues/151\#issuecomment-22879677}.}
+It seems this problem won't be solved in the \biblatex core\footnote{See: \url{https://github.com/plk/biblatex/issues/151\#issuecomment-22879677}.}.
 
 So, if you simply load the \emph{biblatex-true-citepages-omit} footcite package the problem will be solved.
 
