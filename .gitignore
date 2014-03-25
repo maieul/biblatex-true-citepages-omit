@@ -3,6 +3,7 @@
 *.alg
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.dvi
 *.fdb_latexmk
@@ -23,9 +24,11 @@
 *.nlo
 *.out
 *.pdfsync
+*.pdf
 *.ps
 *.snm
 *.synctex.gz
+*.run.xml
 *.toc
 *.vrb
 *.xdy
