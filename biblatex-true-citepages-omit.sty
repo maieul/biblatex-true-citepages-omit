@@ -23,16 +23,28 @@
 }{}{}
 
 \newbibmacro{real-citepages-omit}{%
-	\let\oldemph\emph%
-	\let\emph\relax%
-	\let\oldtextbf\textbf%
-	\let\textbf\relax%
 	\iffieldundef{postnote}{}{%
+		\renewcommand{\do}[1]{%
+			\global\csletcs{old##1}{##1}%
+			\global\csletcs{##1}{relax}%
+		}%
+		\dolistloop{\realcitepagesomit@cmd}%
 		\IfBeginWith{\csfield{postnote}}{\pno}{\clearfield{pages}}{%
 		\IfBeginWith{\csfield{postnote}}{\ppno}{\clearfield{pages}}{}}%
+		%
+		\renewcommand{\do}[1]{%
+			\global\csletcs{##1}{old##1}%
+			\dolistloop{\realcitepagesomit@cmd}%
 		}%
-	\let\emph\oldemph%
-	\let\textbf\oldtextbf%
+	}%
 }%
+
+\def\realcitepagesomit@cmd{}
+
+\newcommand{\realcitepagesomitcmd}[1]{\listadd{\realcitepagesomit@cmd}{#1}}
+\realcitepagesomitcmd{emph}
+\realcitepagesomitcmd{textbf}
+
+
 
 \endinput

@@ -1,12 +1,15 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
+\usepackage{fontenc}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\setotherlanguage{english}
 \usepackage[citestyle=verbose-trad2,citepages=omit]{biblatex}
 \usepackage{biblatex-source-division}
 \usepackage{biblatex-true-citepages-omit}
 \bibliography{exemple.bib}
 \begin{document}
 
-
+\realcitepagesomitcmd{textenglish}
 
 \cite[\pno25\textbf{a}\emph{a}]{Kaestli1993}
 
