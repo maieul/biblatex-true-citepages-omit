@@ -1,0 +1,132 @@
+\documentclass{ltxdockit}[2011/03/25]
+\usepackage{btxdockit}
+\usepackage[main=english,french,latin]{babel}
+\usepackage[bibstyle=verbose,citestyle=verbose,citepages=omit]{biblatex}
+\addbibresource{biblatex-true-citepages-omit.bib}
+\usepackage{biblatex-true-citepages-omit}
+\savebibmacro{real-citepages-omit}
+\renewbibmacro{real-citepages-omit}{}
+\usepackage{fontspec}
+\usepackage[mono=false]{libertine}
+\usepackage{microtype}
+\usepackage[strict]{csquotes}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+\usepackage{shortvrb}
+\usepackage{minted}
+\usepackage{pifont}
+
+% Usefull commands
+\newcommand{\biblatex}{biblatex\xspace}
+\pretocmd{\bibfield}{\sloppy}{}{}
+\pretocmd{\bibtype}{\sloppy}{}{}
+\newcommand{\bibkey}[1]{\texttt #1}
+% Meta-datas
+\titlepage{%
+	title={Correcting a limitation of citepages=omit option of \biblatex styles},
+	email={maieul <at> maieul <dot> net},
+	author={Maïeul Rouquette},
+	subtitle={},
+	revision={1.0.0},
+	date={25/03/2014},
+	url={https://github.com/maieul/biblatex-true-citepages-omit}}
+% Hyphen
+\hyphenation{Ma-de-lei-ne}
+
+\begin{document}
+
+\printtitlepage
+\tableofcontents
+
+\section{Documentation}
+
+\subsection{Goal}
+The citation styles of the family \emph{verbose} of the \biblatex package offer an \emph{citepages=omit} option.
+\begin{minted}{tex}
+\usepackage[bibstyle=verbose,citestyle=verbose,citepages=omit]{biblatex}
+\end{minted}
+
+This option is very useful: it omits the \bibfield{pages} field when a citation is made with a pages' number. For example, the following entry
+
+\inputminted{tex}{biblatex-true-citepages-omit.bib}
+
+called with:
+
+\begin{minted}{tex}
+\cite[112]{Kaestli1993}
+\end{minted} 
+
+will be printed as:
+
+\begin{quotation}
+\cite[112]{Kaestli1993}
+\end{quotation}
+
+and not as:
+\citereset
+
+\begin{quotation}
+\cite{Kaestli1993}, p.~112
+\end{quotation}
+
+This option works perfectly, except if you add a text after page's number, as you can see in the following example.
+
+\begin{minted}{tex}
+\cite[\pno~112, on this point etc.]{Kaestli1993}
+\end{minted}
+
+\citereset
+\begin{quotation}
+\cite[\pno~112, on this point etc.]{Kaestli1993}
+\end{quotation}
+
+It seems this problem won't be solved in the \biblatex core\footnote{See: \url{https://github.com/plk/biblatex/issues/151\#issuecomment-22879677}.}.
+
+So, if you simply load the \emph{biblatex-true-citepages-omit} footcite package the problem will be solved.
+
+\begin{minted}{tex}
+\usepackage[bibstyle=verbose,citestyle=verbose,citepages=omit]{biblatex}
+\usepackage{biblatex-true-citepages-omit}
+...
+\cite[\pno~112, on this point etc.]{Kaestli1993}
+\end{minted}
+
+
+\citereset
+\restorebibmacro{real-citepages-omit}{}
+\begin{quotation}
+\cite[\pno~112, on this point etc.]{Kaestli1993}
+\end{quotation}
+\subsection{Declare commands to be used in \prm{postnote} argument}
+
+If you use some commands in the \prm{postnote} arguments, it could kill \LaTeX. To prevent that, use the \cmd{realcitepagesomit}, which the name of the command as argument. For example, the \emph{polyglossia} switching commands are problematic. So you can do:
+\begin{minted}{tex}
+\realcitepagesomitcmd{textlatin}
+\realcitepagesomitcmd{textgreek}
+\end{minted}
+\subsection{Limitations}
+
+\begin{itemize}
+	\item This package works only if you start the  \prm{postnote}  argument by the \cmd{pno} or \cmd{ppno} commands.
+	\item This package must be loaded after the \emph{biblatex-source-division} package.
+\end{itemize}
+\section{Credits}
+
+This package was created for Maïeul Rouquette's phd dissertation\footnote{\url{http://apocryphes.hypothese.org}.} in 2014. It is licensed on the \emph{\LaTeX\ Project Public License}\footnote{\url{http://latex-project.org/lppl/lppl-1-3c.html}.}. 
+
+
+All issues can be submitted, in French or English, in the GitHub issues page\footnote{\url{https://github.com/maieul/biblatex-source-division/issues}.}.
+
+
+
+\section{Revision History}
+\begin{changelog}
+
+
+
+
+\begin{release}{1.0.0}{2014-13-25}
+\item First public release.
+\end{release}
+
+\end{changelog}
+\end{document}
