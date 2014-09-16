@@ -29,4 +29,13 @@
 	}%
 }%
 
+
+%%% Kept for backward compatibility. No more needed.
+\newcommand{\realcitepagesomitcmd}[1]{\ifcsdef{#1}{\expandafter\robustify\csname#1\endcsname}{}}
+
+\realcitepagesomitcmd{bibleverse}
+\realcitepagesomitcmd{emph}
+\realcitepagesomitcmd{textbf}
+\realcitepagesomitcmd{xspace}
+
 \endinput
