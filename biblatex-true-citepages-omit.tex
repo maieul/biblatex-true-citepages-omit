@@ -96,13 +96,6 @@ So, if you simply load the \emph{biblatex-true-citepages-omit} footcite package 
 \begin{quotation}
 \cite[\pno~112, on this point etc.]{Kaestli1993}
 \end{quotation}
-\subsection{Declare commands to be used in \prm{postnote} argument}
-
-If you use some commands in the \prm{postnote} arguments, it could kill \LaTeX. To prevent that, use the \cmd{realcitepagesomit}, which the name of the command as argument. For example, the \emph{polyglossia} switching commands are problematic. So you can do:
-\begin{minted}{tex}
-\realcitepagesomitcmd{textlatin}
-\realcitepagesomitcmd{textgreek}
-\end{minted}
 \subsection{Limitations}
 
 \begin{itemize}
@@ -120,6 +113,12 @@ All issues can be submitted, in French or English, in the GitHub issues page\foo
 
 \section{Revision History}
 \begin{changelog}
+
+
+\begin{release}{1.2.0}{2014-08-16}
+\item No more \cs{realcitepagesomitcmd} command.
+\item Internal macros with more consistent name.
+\end{release}
 
 \begin{release}{1.1.1}{2014-06-17}
 \item Compatibility with the \cs{xspace} of xspace package.

@@ -15,27 +15,18 @@
 % This work consists of the file biblatex-real-citepages-omit.sty
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{biblatex-true-citepages-omit}[2014/07/14 v1.1.1 real run of citepages=omit for biblatex]
+\ProvidesPackage{biblatex-true-citepages-omit}[2014/09/16 v1.2.0 real run of citepages=omit for biblatex]
 \RequirePackage{xstring}
 
 \AtEveryCitekey{%
-	\usebibmacro{real-citepages-omit}%
+	\usebibmacro{true-citepages-omit}%
 }{}{}
 
-\newbibmacro{real-citepages-omit}{%
+\newbibmacro{true-citepages-omit}{%
 	\iffieldundef{postnote}{}{%
-		\IfBeginWith{\csfield{postnote}}{\pno}{\clearfield{pages}}{%
-		\IfBeginWith{\csfield{postnote}}{\ppno}{\clearfield{pages}}{}}%
+		\IfBeginWith{\noexpand\csfield{postnote}}{\pno}{\clearfield{pages}}{%
+		\IfBeginWith{\noexpand\csfield{postnote}}{\ppno}{\clearfield{pages}}{}}%
 	}%
 }%
-
-
-
-\newcommand{\realcitepagesomitcmd}[1]{\ifcsdef{#1}{\expandafter\robustify\csname#1\endcsname}{}}
-
-\realcitepagesomitcmd{bibleverse}
-\realcitepagesomitcmd{emph}
-\realcitepagesomitcmd{textbf}
-\realcitepagesomitcmd{xspace}
 
 \endinput
