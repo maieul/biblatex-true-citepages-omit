@@ -15,7 +15,7 @@
 % This work consists of the file biblatex-real-citepages-omit.sty
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{biblatex-true-citepages-omit}[2015/12/01 v1.2.0a real run of citepages=omit for biblatex]
+\ProvidesPackage{biblatex-true-citepages-omit}[2016/09/21 v1.3.0 real run of citepages=omit for biblatex]%
 \RequirePackage{xstring}
 
 \AtEveryCitekey{%
@@ -24,11 +24,24 @@
 
 \newbibmacro{true-citepages-omit}{%
 	\iffieldundef{postnote}{}{%
-		\IfBeginWith{\noexpand\csfield{postnote}}{\pno}{\clearfield{pages}}{%
-		\IfBeginWith{\noexpand\csfield{postnote}}{\ppno}{\clearfield{pages}}{}}%
+		\IfBeginWith{\noexpand\csfield{postnote}}{\pno}%
+		  {%
+		  \usebibmacro{true-citepages-omit:clear}%
+		  }{%
+		  \IfBeginWith{\noexpand\csfield{postnote}}{\ppno}%
+		    {%
+		    \usebibmacro{true-citepages-omit:clear}%
+		    }%
+		    {%
+		    }%
+		  }%
 	}%
 }%
 
+\newbibmacro{true-citepages-omit:clear}{%
+ \clearfield{pages}%
+ \clearfield{pagetotal}%
+}%
 
 %%% Kept for backward compatibility. No more needed.
 \newcommand{\realcitepagesomitcmd}[1]{\ifcsdef{#1}{\expandafter\robustify\csname#1\endcsname}{}}
